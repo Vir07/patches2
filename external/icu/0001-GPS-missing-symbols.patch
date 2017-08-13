@@ -1,0 +1,98 @@
+From 60f09e8f550954c769d6e19e51230647a3278bdd Mon Sep 17 00:00:00 2001
+From: pinnamanivenkat <pinnamanivenkat@gmail.com>
+Date: Thu, 8 Jun 2017 10:13:05 +0530
+Subject: [PATCH] GPS missing symbols
+
+Change-Id: I29a9ad8baa6f6f0f8b9fc7c2707421d09781a89f
+---
+ icu4c/source/common/ucnv_err.c | 74 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 74 insertions(+)
+
+diff --git a/icu4c/source/common/ucnv_err.c b/icu4c/source/common/ucnv_err.c
+index 0fb14f0..6900a1a 100644
+--- a/icu4c/source/common/ucnv_err.c
++++ b/icu4c/source/common/ucnv_err.c
+@@ -94,6 +94,80 @@
+     )
+ 
+ 
++#include "unicode/ucnv.h"
++
++U_STABLE UConverter* U_EXPORT2
++ucnv_open_55(const char *converterName, UErrorCode *err)
++{
++    return ucnv_open(converterName, err);
++}
++
++U_STABLE void  U_EXPORT2
++ucnv_close_55(UConverter * converter)
++{
++    return ucnv_close(converter);
++}
++
++U_STABLE void U_EXPORT2 UCNV_TO_U_CALLBACK_STOP_55(
++                  const void *context,
++                  UConverterToUnicodeArgs *toUArgs,
++                  const char* codeUnits,
++                  int32_t length,
++                  UConverterCallbackReason reason,
++                  UErrorCode * err)
++{
++    UCNV_TO_U_CALLBACK_STOP(context, toUArgs, codeUnits, length, reason, err);
++}
++
++U_STABLE void U_EXPORT2 UCNV_FROM_U_CALLBACK_STOP_55(
++                  const void *context,
++                  UConverterFromUnicodeArgs *fromUArgs,
++                  const UChar* codeUnits,
++                  int32_t length,
++                  UChar32 codePoint,
++                  UConverterCallbackReason reason,
++                  UErrorCode * err)
++{
++    UCNV_FROM_U_CALLBACK_STOP (context, fromUArgs, codeUnits, length, codePoint, reason, err);
++}
++
++U_STABLE void U_EXPORT2
++ucnv_setToUCallBack_55(UConverter * converter,
++                     UConverterToUCallback newAction,
++                     const void* newContext,
++                     UConverterToUCallback *oldAction,
++                     const void** oldContext,
++                     UErrorCode * err)
++{
++    ucnv_setToUCallBack(converter, newAction, newContext, oldAction, oldContext, err);
++}
++
++U_STABLE void U_EXPORT2
++ucnv_setFromUCallBack_55(UConverter * converter,
++                       UConverterFromUCallback newAction,
++                       const void *newContext,
++                       UConverterFromUCallback *oldAction,
++                       const void **oldContext,
++                       UErrorCode * err)
++{
++    ucnv_setFromUCallBack(converter, newAction, newContext, oldAction, oldContext, err);
++}
++
++U_STABLE void U_EXPORT2
++ucnv_convertEx_55(UConverter *targetCnv, UConverter *sourceCnv,
++               char **target, const char *targetLimit,
++               const char **source, const char *sourceLimit,
++               UChar *pivotStart, UChar **pivotSource,
++               UChar **pivotTarget, const UChar *pivotLimit,
++               UBool reset, UBool flush,
++               UErrorCode *pErrorCode)
++{
++    ucnv_convertEx(targetCnv, sourceCnv, target, targetLimit, source, sourceLimit,
++                   pivotStart, pivotSource, pivotTarget, pivotLimit, reset, flush,
++                   pErrorCode);
++}
++
++
+ /*Function Pointer STOPS at the ILLEGAL_SEQUENCE */
+ U_CAPI void    U_EXPORT2
+ UCNV_FROM_U_CALLBACK_STOP (
+-- 
+2.7.4
+
